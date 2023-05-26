@@ -226,6 +226,7 @@ public class Bbdd {
 				String nick = resultSet.getString(DB_RAN_NIC);
 				System.out.println(nick.toUpperCase());
 			}
+			statement.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -244,6 +245,7 @@ public class Bbdd {
 					+ ") VALUES (" + (maximoID + 1) + ",'" + participantes.get(i).getNombre() + "',"
 					+ participantes.get(i).getPuntos() + ")");
 		}
+		statement.close();
 	}
 
 	public static int buscarCoincidencia(String nombre) {
@@ -254,6 +256,7 @@ public class Bbdd {
 					"SELECT COUNT(*) FROM " + DB_RAN + " WHERE LOWER(" + DB_RAN_NIC + ") = LOWER('" + nombre + "')");
 			if (resultSet.next()) {
 				int count = resultSet.getInt(1);
+				statement.close();
 				return count;
 			}
 		} catch (SQLException e) {
@@ -283,6 +286,7 @@ public class Bbdd {
 		try {
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.executeUpdate();
+			statement.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
