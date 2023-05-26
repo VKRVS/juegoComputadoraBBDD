@@ -15,7 +15,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class Ficheros {
-
+/*
 	static File rankingFichero = new File("ranking.txt");
 	static File historicoFichero = new File("historico.txt");
 	static Scanner entrada = new Scanner(System.in);
@@ -462,4 +462,5 @@ public class Ficheros {
 		}
 		return lineas;
 	}
+	*/
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>juegoComputadora</name>
+	<name>juegoComputadoraBBDD</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -18,7 +18,13 @@
 		<link>
 			<name>src/juegoComputadora/ranking.txt</name>
 			<type>1</type>
-			<locationURI>PROJECT_LOC/ranking.txt</locationURI>
+			<locationURI>copy_PROJECT_LOC/ranking.txt</locationURI>
 		</link>
 	</linkedResources>
+	<variableList>
+		<variable>
+			<name>copy_PROJECT_LOC</name>
+			<value>$%7BPARENT-3-ECLIPSE_HOME%7D/git/juegoComputadoraBBDD</value>
+		</variable>
+	</variableList>
 </projectDescription>

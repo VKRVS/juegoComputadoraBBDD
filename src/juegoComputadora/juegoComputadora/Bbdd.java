@@ -2,15 +2,12 @@ package juegoComputadora;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-/**
- *
- * @author lionel
- */
 public class Bbdd {
 
 	// Conexión a la base de datos
@@ -18,7 +15,10 @@ public class Bbdd {
 
 	// Configuración de la conexión a la base de datos
 	private static final String DB_HOST = "localhost";
-	private static final String DB_PORT = "3306";
+	// Para Linux:
+	// private static final String DB_PORT = "3306";
+	// Para Windows:
+	private static final String DB_PORT = "3307";
 	private static final String DB_NAME = "juegoDamGGM";
 	private static final String DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME
 			+ "?serverTimezone=UTC";
@@ -121,7 +121,7 @@ public class Bbdd {
 		connect();
 	}
 
-	public static void muestraRanking() {
+	public static void verRanking() {
 		Statement statement;
 		try {
 			statement = conn.createStatement();
@@ -139,7 +139,7 @@ public class Bbdd {
 		}
 	}
 
-	public static void muestraHistorico() {
+	public static void verHistorico() {
 		Statement statement;
 		try {
 			statement = conn.createStatement();
@@ -170,7 +170,7 @@ public class Bbdd {
 		}
 	}
 
-	public static <PreparedStatement> void crearJugador() {
+	public static void anadirJugador() {
 		System.out.println("Introduce el nombre del jugador");
 		Statement statement;
 		try {
@@ -192,7 +192,7 @@ public class Bbdd {
 
 	}
 
-	public static <PreparedStatement> void eliminarJugador() {
+	public static void eliminarJugador() {
 		System.out.println("Introduce el nombre del jugador");
 		Statement statement;
 		try {
@@ -215,7 +215,7 @@ public class Bbdd {
 
 	}
 
-	public static void muestraJugadores() {
+	public static void verJugadores() {
 		Statement statement;
 		try {
 			statement = conn.createStatement();
@@ -245,4 +245,48 @@ public class Bbdd {
 					+ participantes.get(i).getPuntos() + ")");
 		}
 	}
+
+	public static int buscarCoincidencia(String nombre) {
+		Statement statement;
+		try {
+			statement = conn.createStatement();
+			ResultSet resultSet = statement.executeQuery(
+					"SELECT COUNT(*) FROM " + DB_RAN + " WHERE LOWER(" + DB_RAN_NIC + ") = LOWER('" + nombre + "')");
+			if (resultSet.next()) {
+				int count = resultSet.getInt(1);
+				return count;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public static void anadirJugadorNombre(String nombre) {
+		Statement statement;
+		try {
+			statement = conn.createStatement();
+			statement.execute("INSERT INTO " + DB_RAN + " VALUES ('" + nombre + "',0)");
+			System.out.println("El jugador " + nombre.toUpperCase() + " ha sido añadido al sistema");
+			statement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void anadirPuntos(String nombre, int puntos) {
+		String sql = "UPDATE " + DB_RAN + " SET " + DB_RAN_PUN + " = (" + DB_RAN_PUN + " + " + puntos + ") WHERE "
+				+ DB_RAN_NIC + " = LOWER('" + nombre + "')";
+		try {
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }

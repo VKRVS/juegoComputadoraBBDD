@@ -1,6 +1,7 @@
 package juegoComputadora;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Partida {
@@ -38,12 +39,14 @@ public class Partida {
 				String nombre;
 				System.out.println("Introduce el nombre del jugador #" + (i + 1));
 				nombre = Extra.entrada.next();
-				if (Ficheros.buscarCoincidencia(nombre) != 0) {
+				if (Bbdd.buscarCoincidencia(nombre) != 0) {
+					// if (Ficheros.buscarCoincidencia(nombre) != 0) {
 					System.out.println("Jugador encontrado en el sistema");
 					participantes.add(new PJ(nombre, 0));
 				} else {
 					System.out.println("El jugador no existe en el sistema. Creando jugador...");
-					Ficheros.anadirJugadorNombre(nombre);
+					Bbdd.anadirJugadorNombre(nombre);
+					// Ficheros.anadirJugadorNombre(nombre);
 					participantes.add(new PJ(nombre, 0));
 				}
 			}
@@ -75,10 +78,18 @@ public class Partida {
 		}
 		for (int i = 0; i < participantes.size(); i++) {
 			if (participantes.get(i) instanceof PJ) {
-				Ficheros.anadirPuntos(participantes.get(i).getNombre(), participantes.get(i).getPuntos());
+				Bbdd.anadirPuntos(participantes.get(i).getNombre(), participantes.get(i).getPuntos());
+				// Ficheros.anadirPuntos(participantes.get(i).getNombre(),
+				// participantes.get(i).getPuntos());
 			}
 		}
-		Ficheros.partidaAlHistorico(participantes);
+		try {
+			Bbdd.partidaAlHistorico(participantes);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// Ficheros.partidaAlHistorico(participantes);
 		System.out.println();
 		System.out.println("¡FIN DE LA PARTIDA!");
 		System.out.println();

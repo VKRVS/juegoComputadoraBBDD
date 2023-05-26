@@ -2,7 +2,6 @@ package juegoComputadora;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.text.Normalizer;
 import java.util.Scanner;
 
