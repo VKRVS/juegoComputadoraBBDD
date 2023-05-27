@@ -1,5 +1,0 @@
-Cpu1 0 Cpu2 2 Cpu3 2 Cpu4 3
-Cpu1 4 Cpu2 9 Cpu3 5 Cpu4 8
-Daniel 1
-Cpu1 6 Cpu2 11 Cpu3 6 Cpu4 12
-Cpu1 7 Cpu2 9 Cpu3 7 Cpu4 9
