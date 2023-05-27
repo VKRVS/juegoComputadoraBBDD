@@ -14,13 +14,6 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/juegoComputadora/ranking.txt</name>
-			<type>1</type>
-			<locationURI>copy_PROJECT_LOC/ranking.txt</locationURI>
-		</link>
-	</linkedResources>
 	<variableList>
 		<variable>
 			<name>copy_PROJECT_LOC</name>
